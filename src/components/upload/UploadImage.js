@@ -1,10 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
+//just a comment
+
 const UploadImage = () => {
 
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState('Choose File');
     const [uploadedFile, setUploadedFile] = useState({});
+    const [text, setText] = useState("");
 
     const onChange = e => {
         setFile(e.target.files[0]);
@@ -17,7 +20,7 @@ const UploadImage = () => {
         formData.append('file', file);
 
         try {
-            const res = await axios.post('/upload', formData, {
+            const res = await axios.post('http://localhost:5000/user/image', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -25,13 +28,16 @@ const UploadImage = () => {
 
             const {fileName, filePath} = res.data;
             setUploadedFile({fileName, filePath});
+            console.log(res.data.message)
+            setText(res.data.message);
 
         } catch(err) {
-            if(err.response.status === 500) {
-                console.log('There was a problem with the server');
-            }else {
-                console.log(err.response.data.msg);
-            }
+            // if(err.response.status === 500) {
+            //     console.log('There was a problem with the server');
+            // }else {
+            //     console.log(err.response.data.msg);
+            // }
+            console.log("wrong input");
         }
     };
 
@@ -48,7 +54,11 @@ const UploadImage = () => {
                         <label className="custom-file-label" htmlFor="customFile">{fileName}</label>
                     </div>
                     <input type="submit" value="Upload" className="btn btn-primary btn-block mt-4" />
+                    <h2>{text}</h2>
                 </form>
+                <div>
+                    
+                </div>
             </Fragment>
             
         </div>

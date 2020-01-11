@@ -38,3 +38,14 @@ textarea.materialize-textare:focus:not([readonly]) {
   box-shadow: none;
 }
 
+
+/* .dashboard-container {
+  padding: 50px;
+} */
+
+.content {
+  padding: 50px;
+}
+
+
+

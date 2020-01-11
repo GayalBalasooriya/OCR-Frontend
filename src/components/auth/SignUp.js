@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
   class SignUp extends Component {
     state = {
@@ -14,10 +15,31 @@ import React, { Component } from 'react'
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.props.history.push("/upload");
+        //console.log(this.state);
+        const body = JSON.stringify(this.state)
+            console.log(body)
+        
+        try {
+            const res = await axios.post('http://localhost:5000/user/signup', body, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log(res.data)
+            this.props.history.push("/upload");
+            
+
+        } catch(err) {
+            // if(err.response.status == 500) {
+            //     console.log('There was a problem with the server');
+            // }else {
+            //     console.log(err.response.data.msg);
+            // }
+            console.log("wrong input");
+        }
     }
 
     render() {
