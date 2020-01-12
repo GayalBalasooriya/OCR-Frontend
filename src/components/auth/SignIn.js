@@ -41,7 +41,7 @@ import axios from 'axios'
             //     console.log(err.response.data.msg);
             // }
             console.log("wrong input");
-            this.state.error = "fucked";
+            this.state.error = "wrong input";
             console.log(this.state.error)
         }
         
